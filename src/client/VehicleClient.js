@@ -46,6 +46,15 @@ class VehicleClient {
             .catch(response => Promise.reject(response))
     }
 
+    changeLane(vehicleId, offset) {
+        return this._restClient
+            .post(`http://localhost:8090/api/vehicle/${vehicleId}/change-lane`, {
+                offset
+            })
+            .then(response => Promise.resolve(response.data))
+            .catch(response => Promise.reject(response))
+    }
+
 }
 
 export {VehicleClient}

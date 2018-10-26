@@ -31,6 +31,20 @@
                     >
                     </b-form-input>
                 </b-form-group>
+                <b-button-group style="margin-left:100px;">
+                    <b-button class="change-lane" @click="changeLane(vehicle.id, -68.0)">
+                        Lane 1
+                    </b-button>
+                    <b-button class="change-lane" @click="changeLane(vehicle.id, -34.0)">
+                        Lane 2
+                    </b-button>
+                    <b-button class="change-lane" @click="changeLane(vehicle.id, 34.0)">
+                        Lane 3
+                    </b-button>
+                    <b-button class="change-lane" @click="changeLane(vehicle.id, 68.0)">
+                        Lane 4
+                    </b-button>
+                </b-button-group>
                 </div>
             </b-card>
         </b-col>
@@ -81,11 +95,17 @@ export default {
 
         stop(vehicleId) {
             this.client.setSpeed(vehicleId, 0)
+        },
+
+        changeLane(vehicleId, offset) {
+            this.client.changeLane(vehicleId, offset)
         }
     }
 }
 </script>
 
 <style scoped>
-
+.change-lane {
+    margin: 5px;
+}
 </style>

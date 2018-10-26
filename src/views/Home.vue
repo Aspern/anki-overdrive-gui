@@ -1,18 +1,17 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <start-page msg="Welcome to Your Vue.js + TypeScript App"/>
+    <dashboard />
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import StartPage from '@/components/StartPage.vue'; // @ is an alias to /src
+<script>
+// @ is an alias to /src
+import Dashboard from '@/components/Dashboard.vue'
 
-@Component({
+export default {
+  name: 'home',
   components: {
-      StartPage,
-  },
-})
-export default class Home extends Vue {}
+      Dashboard
+  }
+}
 </script>

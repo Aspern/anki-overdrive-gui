@@ -55,6 +55,13 @@ class VehicleClient {
             .catch(response => Promise.reject(response))
     }
 
+    queryBatteryLevel(vehicleId) {
+        return this._restClient
+            .get(`http://localhost:8090/api/vehicle/${vehicleId}/battery-level`)
+            .then(response => Promise.resolve(response.data))
+            .catch(response => Promise.reject(response))
+    }
+
 }
 
 export {VehicleClient}

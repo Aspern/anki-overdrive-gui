@@ -21,11 +21,11 @@
             </template>
             <template slot="offset" slot-scope="data">
                 <b-form-select
-                        v-model="data.value"
-                        :options="offsetOptions"
-                        :disabled="!data.item.connected"
-                        style="max-width:250px;"
-                        @change="changeOffset(arguments[0], data.item.id)"
+                    v-model="data.value"
+                    :options="offsetOptions"
+                    :disabled="!data.item.connected"
+                    style="max-width:250px;"
+                    @change="changeOffset(arguments[0], data.item.id)"
                 />
             </template>
             <template slot="picture" slot-scope="data">
@@ -42,15 +42,25 @@
 </template>
 
 <script>
-import eb401ef0f82b from '../assets/eb401ef0f82b.png'
-import ed0c94216553 from '../assets/ed0c94216553.png'
-import {VehicleClient} from "../client/VehicleClient";
-
 export default {
+
+    props: {
+        vehicles: {
+            type: Array,
+            default: () => []
+        },
+
+        client: {
+            required: true
+        },
+
+        pictures: {
+            default: () => new Map()
+        }
+    },
+
     data() {
         return {
-            vehicles: [],
-            client: null,
             offsetOptions: [
                 {value: 0, text: 'Zentriert (0mm)'},
                 {value: -68, text: 'Lane 1 (-68.0mm)'},
@@ -58,10 +68,6 @@ export default {
                 {value: 34, text: 'Lane 3 (34.0mm)'},
                 {value: 68, text: 'Lane 4 (68.0mm)'},
             ],
-            pictures: new Map([
-                ['eb401ef0f82b', eb401ef0f82b],
-                ['ed0c94216553', ed0c94216553]
-            ]),
             fields: [
                 {
                     key: 'picture',
@@ -92,22 +98,7 @@ export default {
         }
     },
 
-    created() {
-        this.client = new VehicleClient()
-        this.loadVehicles()
-    },
-
     methods: {
-
-        loadVehicles() {
-            const self = this
-            this.client
-                .vehicles()
-                .then(vehicles => {
-                    self.vehicles = vehicles
-                    self.$emit('vehiclechanged', self.vehicles)
-                })
-        },
 
         connectButtonVariant(state) {
             if(state) return "success"
@@ -120,8 +111,10 @@ export default {
         },
 
         toggleConnection(state, vehicleId) {
-            if(state) this.client.disconnect(vehicleId).then(this.loadVehicles.bind(this))
-            else this.client.connect(vehicleId).then(this.loadVehicles.bind(this))
+            const self = this
+            if(state) this.client.disconnect(vehicleId).then(self.$emit('connectionchange'))
+            else this.client.connect(vehicleId).then(self.$emit('connectionchange'))
+
         },
 
         changeOffset(offset, vehicleId) {

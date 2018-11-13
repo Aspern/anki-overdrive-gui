@@ -62,6 +62,20 @@ class VehicleClient {
             .catch(response => Promise.reject(response))
     }
 
+    startAntiCollision() {
+        return this._restClient
+            .post(`http://localhost:8090/api/anti-collision`)
+            .then(response => Promise.resolve(response.data))
+            .catch(response => Promise.reject(response))
+    }
+
+    stopAntiCollision() {
+        return this._restClient
+            .delete(`http://localhost:8090/api/anti-collision`)
+            .then(response => Promise.resolve(response.data))
+            .catch(response => Promise.reject(response))
+    }
+
 }
 
 export {VehicleClient}

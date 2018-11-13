@@ -19,6 +19,10 @@
                 @connectionchange="onConnectionchange"
             />
             <b-row>
+                <scenarios
+                   :connected-vehicles="connectedVehicles.length"
+                   :client="client"
+                />
                 <vehicle-controller
                     v-for="vehicle in connectedVehicles"
                     :key="vehicle.id"
@@ -34,13 +38,15 @@
 
 <script>
 import VehicleList from "./VehicleList"
-import VehicleController from "./VehicleController";
-import {VehicleClient} from "../client/VehicleClient";
+import VehicleController from "./VehicleController"
+import Scenarios from "./Scenarios"
+import {VehicleClient} from "../client/VehicleClient"
 import eb401ef0f82b from '../assets/eb401ef0f82b.png'
 import ed0c94216553 from '../assets/ed0c94216553.png'
 
 export default {
     components: {
+        Scenarios,
         VehicleController,
         VehicleList
     },

@@ -43,6 +43,8 @@ import Scenarios from "./Scenarios"
 import {VehicleClient} from "../client/VehicleClient"
 import eb401ef0f82b from '../assets/eb401ef0f82b.png'
 import ed0c94216553 from '../assets/ed0c94216553.png'
+import cb73ac40502a from '../assets/cb73ac40502a.png'
+import c667a5ded647 from '../assets/c667a5ded647.png'
 
 export default {
     components: {
@@ -59,7 +61,9 @@ export default {
             autoRefreshTask: null,
             pictures: new Map([
                 ['eb401ef0f82b', eb401ef0f82b],
-                ['ed0c94216553', ed0c94216553]
+                ['ed0c94216553', ed0c94216553],
+                ['cb73ac40502a', cb73ac40502a],
+                ['c667a5ded647', c667a5ded647]
             ]),
         }
     },
